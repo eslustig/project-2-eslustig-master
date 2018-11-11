@@ -19,6 +19,9 @@ import ssl
 ## Grab the headlines from the "Most Read" section
 ## and return them in a list
 def grab_headlines(soup):
+	for x in soup:
+		if soup == 1:
+			print("hey there")
     
     # get the most read div
     
@@ -27,8 +30,6 @@ def grab_headlines(soup):
     # get the links from the ordered list div
     
     # return the headlines
-
-    pass
 
 
 ## PART 2 Complete a function called get_headline_dict. It will take a soup object and return a dictionary
