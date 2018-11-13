@@ -43,9 +43,12 @@ def grab_headlines(soup):
 ## OUTPUT: Return - a dictionary with each story headline as the key and the story url as the value
 def get_headline_dict(soup):
     mydict = {}
-    print("-----------------------------------------")
     campbells = soup.find_all("div", class_ = "storywrap")
-    print(campbells[0])
+    for item in campbells:
+        myheadlines = item.find_all('div', class_ = 'views-field-field-short-headline')[0]
+        mylist = myheadlines.find_all('a')[0]
+        mydict[mylist.text] = mylist.get('href')
+    return mydict
     
     # create the empty dictionary
     
@@ -57,7 +60,6 @@ def get_headline_dict(soup):
     
     # set the dictionary key to the headline and the url as the value
 
-    pass
 
 
 ## PART 3 Define a function called get_page_info. It will take a soup object for a story
@@ -66,7 +68,16 @@ def get_headline_dict(soup):
 ## INPUT: soup - the soup object
 ## OUTPUT: Return - a tuple with the title, author, date, and number of paragraphs
 def get_page_info(soup):
-    
+    mytitle = soup.find_all('div', class_ = 'pane-node-title')[0].text.strip()
+    find_date = soup.find_all('div', class_ = "pane-node-created")[0]
+    date = find_date.find_all('div', class_ = 'pane-content')[0].text
+    text = soup.find_all('div', class_ = "field-name-body")[0]
+    text_count = len(text.find_all('p'))
+    find_author = soup.find_all('div', class_ = 'byline')[0]
+    author = find_author.find_all('a')[0].text
+    return (mytitle, date, author, text_count)
+
+
     # get the title
     
     # get the date
