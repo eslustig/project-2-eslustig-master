@@ -18,11 +18,16 @@ import ssl
 ## INPUT: soup - the soup object to process
 ## Grab the headlines from the "Most Read" section
 ## and return them in a list
-def grab_headlines(soup):
-	for x in soup:
-		if soup == 1:
-			print("hey there")
-    
+def grab_headlines(soup):  
+
+    campbells = soup.find_all('div', class_ = "view-most-read")[0]
+    campbells = campbells.find_all('a')
+    headlines = []
+    for x in campbells:
+        headlines.append(x.text)
+    return headlines
+
+
     # get the most read div
     
     # get the ordered list from that div
@@ -37,6 +42,10 @@ def grab_headlines(soup):
 ## INPUT: soup - the soup object
 ## OUTPUT: Return - a dictionary with each story headline as the key and the story url as the value
 def get_headline_dict(soup):
+    mydict = {}
+    print("-----------------------------------------")
+    campbells = soup.find_all("div", class_ = "storywrap")
+    print(campbells[0])
     
     # create the empty dictionary
     
